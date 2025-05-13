@@ -19,5 +19,4 @@ Customers are frustrated by wait times, support calls are up, and we risk reputa
 Please investigate the cause of the slowdown and restore normal performance as soon as possible.
 
 Thank you,
-Abir Hossain
-Associate Software Engineer – IB Ops
+Random User

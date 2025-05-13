@@ -10,6 +10,5 @@ Average Delay: ~3 minutes
 Please investigate the SMS gateway.
 
 Best,
-Abir Hossain
-Associate Software Engineer – IB Ops
+Random User
 

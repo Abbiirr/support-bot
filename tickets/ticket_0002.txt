@@ -10,5 +10,4 @@ Error Code: FT-VAL-001
 Kindly review and resolve.
 
 Regards,
-Abir Hossain
-Associate Software Engineer – IB Ops
+Random User

@@ -22,5 +22,4 @@ Expected Behavior:
 Requesting a root-cause analysis and fix.
 
 Regards,
-Abir Hossain
-Associate Software Engineer – IB Ops
+Random User
