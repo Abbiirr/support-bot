@@ -2,7 +2,7 @@ Dear Sir,
 
 We observed the following transaction failure:
 
-Date/Time: 2025-05-08 17:00 BDT
+Date/Time: 2025-05-08 17:55:21 BDT
 ExtID: IBP25050811524606
 
 Please check and advise.

@@ -1,0 +1,15 @@
+Dear Sir,
+
+We are seeing OTP delivery delays:
+
+Date/Time: 2025-05-13 10:05:12 BDT
+Channel: SMS OTP
+Affected Count: 25 requests
+Average Delay: ~3 minutes
+
+Please investigate the SMS gateway.
+
+Best,
+Abir Hossain
+Associate Software Engineer – IB Ops
+

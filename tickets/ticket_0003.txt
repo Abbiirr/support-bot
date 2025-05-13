@@ -1,0 +1,13 @@
+Dear Support,
+
+Customers are unable to download the e-statement PDF:
+
+Date/Time: 2025-05-13 08:15:47 BDT
+Module: E-Statement Service
+Error Message: “Document generation failed”
+
+Please look into the issue urgently.
+
+Thank you,
+Abir Hossain
+Associate Software Engineer – IB Ops

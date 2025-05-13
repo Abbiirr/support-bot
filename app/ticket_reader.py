@@ -83,21 +83,21 @@ def read_and_reply(ticket_filename: str) -> None:
 
     # Process ticket
     ticket = read_ticket_from_text(raw_text)
-    context = gather_context(ticket)
+    # context = gather_context(ticket)
     reply = generate_ack_reply(ticket)
 
     # Derive base filename (without extension)
     base, _ = os.path.splitext(ticket_filename)
-    context_path = os.path.join(context_dir, f"{base}_context.txt")
+    # context_path = os.path.join(context_dir, f"{base}_context.txt")
     reply_path = os.path.join(replies_dir, f"{base}_reply.txt")
 
     # Write context to ../context
-    with open(context_path, 'w', encoding='utf-8') as ctx_file:
-        ctx_file.write(context)
+    # with open(context_path, 'w', encoding='utf-8') as ctx_file:
+    #     ctx_file.write(context)
 
     # Write reply to ../replies
     with open(reply_path, 'w', encoding='utf-8') as rep_file:
         rep_file.write(reply)
 
-    print(f"Context written to {context_path}")
+    # print(f"Context written to {context_path}")
     print(f"Reply written to {reply_path}")
