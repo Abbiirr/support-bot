@@ -1,0 +1,49 @@
+Issue: UI Dropdown Fails to Load Customer List on Account Summary Page
+1. What Happened
+When navigating to the Account Summary page, users reported that the “Select Customer” dropdown remained blank. No list items appeared and the browser console showed a JavaScript error. Attempts to refresh the page or log out and back in did not resolve the issue.
+
+2. Why It Happened
+A recent rollback of the customer‐service API inadvertently removed the /customers endpoint. The frontend code had no fallback and did not catch the 404 response. This unhandled error caused the React component to fail during rendering, preventing the dropdown from populating. The deployment pipeline lacked an integration test for this particular user flow.
+
+3. How the Issue Was Resolved
+The operations team redeployed the stable version of the customer‐service API restoring the /customers endpoint. The frontend code was patched to include error handling: if the API returns an error, the dropdown displays a friendly message (“Unable to load customers, please try again later”) instead of crashing. We also added an end‐to‐end test to our CI pipeline to verify that the dropdown loads at least one entry.
+
+4. Likelihood of the Issue Recurring in the Future
+Low. The rollback path has been updated to include endpoint verification, and the CI pipeline now covers this critical user flow.
+
+5. Steps to Prevent It from Happening Again
+Add health‐check calls for all public API endpoints in the deployment pipeline.
+
+Expand automated UI tests to cover key components like dropdowns and search bars.
+
+Introduce a “circuit breaker” in the frontend so that downstream errors do not break the entire page.
+
+6. How to Fix
+Restore Missing Endpoint & Add Fallback
+
+Ensure the /customers endpoint is always present in customer‐service API specs and monitored via health checks
+apitoolkit.io
+.
+
+In the React code, wrap the fetch call in try/catch and render a fallback UI on error.
+
+Implement React Error Boundary
+
+Use an Error Boundary around the dropdown component to catch render errors and show a fallback component rather than letting the entire page crash
+Stack Overflow
+.
+
+Configure Server for Client‐Side Routing
+
+If using React Router, configure the web server (e.g., Nginx) to direct all routes to index.html to avoid 404s on refresh
+DEV Community
+.
+
+Add Integration Tests in CI
+
+Use Cypress or Playwright to assert that the dropdown fetches at least one customer in staging before merge.
+
+Monitor Frontend Errors
+
+Integrate Sentry (or similar) to capture unhandled promise rejections and React errors in production.
+

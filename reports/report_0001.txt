@@ -1,0 +1,63 @@
+Issue: Database Connection Pool Exhaustion in Transaction Processing Service
+1. What Happened
+During peak transaction hours, the Transaction Processing Service began rejecting incoming requests with timeout errors. End users saw “Service Unavailable” messages when attempting to complete payments. Simultaneously, monitoring alerts indicated that the database connection pool had reached its maximum size and new connections were being refused.
+
+2. Why It Happened
+The default connection pool size was set to 50, which was sufficient under normal load but inadequate during surge traffic. A misconfiguration in the autoscaling rules for the service meant that additional application instances were not spun up quickly enough to share the load. As a result, all available database connections were consumed by long‐running queries and idle sessions, preventing new requests from acquiring a connection.
+
+3. How the Issue Was Resolved
+We increased the connection pool maximum to 200 and reduced the idle timeout for unused connections from 30 minutes to 5 minutes. We also corrected the autoscaling policy so that additional service pods are provisioned when CPU utilization exceeds 60% for more than two minutes. After deploying these changes, the service maintained healthy connection levels even under peak load.
+
+4. Likelihood of the Issue Recurring in the Future
+Low–moderate. The pool size and autoscaling rules now accommodate the current peak transaction volume plus a 30% buffer. However, if transaction volume grows unexpectedly or query performance degrades, we could again approach the new limits.
+
+5. Steps to Prevent It from Happening Again
+Implement continuous monitoring with proactive alerts when connection pool usage exceeds 70%.
+
+Run annual load‐testing exercises to validate pool size and autoscaling thresholds.
+
+Review and optimize any queries that hold connections for longer than five seconds.
+
+6. How to Fix
+Tune HikariCP Settings
+
+In application.properties (or application.yml), set:
+
+properties
+Copy
+Edit
+spring.datasource.hikari.maximum-pool-size=200
+spring.datasource.hikari.idle-timeout=300000       # 5 minutes
+spring.datasource.hikari.max-lifetime=1800000      # 30 minutes
+spring.datasource.hikari.connection-timeout=30000  # 30 seconds
+These values align with HikariCP best practices for burst traffic
+Stack Overflow
+ and ensure idle connections are released promptly
+Medium
+.
+
+Enforce Socket Timeouts
+
+Configure your JDBC URL to include socketTimeout to prevent hanging validation checks:
+
+bash
+Copy
+Edit
+jdbc:postgresql://host:port/db?socketTimeout=30
+This addresses GitHub‐reported issues where lack of a socket timeout caused pools to block indefinitely
+GitHub
+.
+
+Implement Connection Leak Detection
+
+Enable HikariCP’s leak detection threshold (e.g., spring.datasource.hikari.leak-detection-threshold=20000) to log warnings if connections are held too long.
+
+Optimize Autoscaling Rules
+
+Ensure Horizontal Pod Autoscaler (HPA) triggers at CPU > 60% for ≥ 2 minutes.
+
+Validate scaling events via load tests.
+
+Add Pool Usage Dashboarding
+
+Expose HikariCP metrics (via Micrometer) to Grafana and alert when poolUsage > 0.7.

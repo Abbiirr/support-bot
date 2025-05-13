@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "issue": "UI Dropdown Fails to Load Customer List on Account Summary Page"
+  },
+  "mainContentBody": {
+    "whatHappened": "When navigating to the Account Summary page, users reported that the “Select Customer” dropdown remained blank. No list items appeared and the browser console showed a JavaScript error. Attempts to refresh the page or log out and back in did not resolve the issue.",  :contentReference[oaicite:12]{index=12}:contentReference[oaicite:13]{index=13}
+    "whyItHappened": "A recent rollback of the customer-service API inadvertently removed the /customers endpoint. The frontend code had no fallback and did not catch the 404 response. This unhandled error caused the React component to fail during rendering, preventing the dropdown from populating. The deployment pipeline lacked an integration test for this particular user flow.",  :contentReference[oaicite:14]{index=14}:contentReference[oaicite:15]{index=15}
+    "howResolved": [
+      "Redeployed the stable version of the customer-service API restoring the /customers endpoint.",
+      "Patched the frontend code to include error handling: on error, the dropdown displays a friendly message (“Unable to load customers, please try again later”) instead of crashing.",
+      "Added an end-to-end CI test to verify that the dropdown loads at least one entry."
+    ],
+    "recurrenceLikelihood": "Low. The rollback path has been updated to include endpoint verification, and the CI pipeline now covers this critical user flow.",  :contentReference[oaicite:18]{index=18}:contentReference[oaicite:19]{index=19}
+    "preventiveSteps": [
+      "Add health-check calls for all public API endpoints in the deployment pipeline.",
+      "Expand automated UI tests to cover key components like dropdowns and search bars.",
+      "Introduce a “circuit breaker” in the frontend so that downstream errors do not break the entire page."
+    ],
+    "howToFix": [
+      "Restore Missing Endpoint & Add Fallback: Ensure /customers is always present and monitored; wrap fetch calls in try/catch with a fallback UI.",
+      "Implement React Error Boundary around the dropdown component to catch render errors.",
+      "Configure Server for Client-Side Routing (e.g., Nginx) to direct all routes to index.html to avoid 404s.",
+      "Add Integration Tests in CI (Cypress/Playwright) asserting that the dropdown fetches at least one customer.",
+      "Monitor Frontend Errors via Sentry (or similar) for unhandled promise rejections and React errors in production."
+    ]
+  }
+}

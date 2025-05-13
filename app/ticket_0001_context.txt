@@ -1,0 +1,16 @@
+Dear Sir,
+Dear Sir,
+
+We observed the following transaction failure:
+
+Date/Time: 2025-05-08 17:00 BDT
+ExtID: IBP25050811524606
+
+Please check and advise.
+
+Thanks & Regards,
+Abir Hossain
+Associate Software Engineer – IB Ops
+MMBL Internet Banking
+Mobile: +8801996516129
+E-mail: abir.hossain@mmbl.com

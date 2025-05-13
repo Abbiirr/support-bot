@@ -1,0 +1,55 @@
+Issue: Payment Gateway Timeout During Batch Settlement
+1. What Happened
+At batch settlement time (02:00 AM), the settlement service attempted to send aggregated transactions to the external payment gateway. The gateway did not respond within the 10-second timeout window, causing the batch to fail and leaving transactions in limbo. Financial reconciliation teams noticed missing entries the next morning.
+
+2. Why It Happened
+The external gateway was under maintenance and operating in degraded mode, increasing its response times. Our system used a hardcoded 10-second timeout and no retry logic. Additionally, there was no calendar-aware suppression of alerts, so the maintenance window was not recognized.
+
+3. How the Issue Was Resolved
+We rescheduled maintenance notifications to feed into our release calendar and updated the settlement job to:
+
+Increase the request timeout to 30 seconds
+
+Implement exponential‐backoff retry for up to three attempts
+
+Check against the maintenance calendar and postpone non-critical batches during known maintenance windows
+
+After making these changes, the batch settlement retried successfully during the same maintenance period.
+
+4. Likelihood of the Issue Recurring in the Future
+Minimal. With calendar-aware scheduling and retry logic, transient slowdowns no longer cause permanent failures.
+
+5. Steps to Prevent It from Happening Again
+Integrate a “maintenance mode” flag from the payment gateway into our job scheduler.
+
+Log all retry attempts and alert only if all retries fail.
+
+Conduct quarterly drills simulating gateway slowdowns and verify that settlement jobs complete successfully.
+
+6. How to Fix
+Increase Timeout & Add Retries
+
+Set the HTTP client timeout to 30 seconds and implement up to three retries with exponential backoff and jitter to avoid thundering herds
+Amazon Web Services, Inc.
+
+PullRequest
+.
+
+Calendar-Aware Scheduling
+
+Integrate your maintenance calendar (e.g., via AWS Systems Manager Maintenance Windows or an internal scheduling service) so that jobs automatically defer during known maintenance windows
+AWS Documentation
+.
+
+Implement Retry Metrics & Alerts
+
+Expose retry counts and errors to your monitoring system (e.g., Datadog, Grafana) and configure alerts only when retries are exhausted.
+
+Use Circuit Breaker Pattern
+
+Wrap calls to the external gateway in a circuit breaker (e.g., Resilience4j or Hystrix) to fail fast when the gateway is unhealthy.
+
+Test Under Degraded Conditions
+
+Automate periodic testing against a staging gateway running in degraded mode to validate retry logic.
+

@@ -1,0 +1,49 @@
+{
+  "metadata": {
+    "issue": "Sonali Bank NPSB Transaction Failures in MMBL Internet Banking",
+    "occurrence_datetime": "2025-05-08T17:41:40.994+06:00",
+    "extId": "IBP25050811524606",
+    "requestId": "5c45c449-4666-4e51-8a56-84e54122bcb0",
+    "authRespCode": "121",
+    "failure_reason": "Not certified for NPSB network",
+    "severity": "High",
+    "system": "MMBL Internet Banking",
+    "components": [
+      "NPSB Integration"
+    ],
+    "tags": [
+      "banking",
+      "SonaliBank",
+      "NPSB",
+      "transaction-failure",
+      "certification"
+    ]
+  },
+  "mainContentBody": {
+    "whatHappened": "On May 8, 2025 at 17:41 BDT, deposit requests via Sonali Bank’s NPSB interface in MMBL Internet Banking received no confirmation and did not post funds. The UI displayed no error, but reconciliation teams flagged missing transactions.",
+    "whyItHappened": "The Sonali Bank endpoint returned AuthRespCode '121' (“Not certified for NPSB network”). Our integration treats any code other than '1' as a hard failure, so the request was aborted without retry.",
+    "howResolved": [
+      "Retrieved the timestamp and ExtID from the customer report.",
+      "Loaded log files for 2025-05-08 17:00–18:00 and filtered by the requestId.",
+      "Located the downstream response block showing AuthRespCode '121'.",
+      "Escalated with trace ID and timestamp to Sonali Bank; they updated their certification.",
+      "Retested in sandbox and received AuthRespCode '1', confirming successful certification."
+    ],
+    "recurrenceLikelihood": "Low–moderate. Proper certification is now in place, but lapses or new unannounced endpoints could reintroduce failures.",
+    "preventiveSteps": [
+      "Schedule a daily “ping” transaction to each NPSB endpoint and alert on any non-'1' response.",
+      "Monitor certificate expiry dates and trigger reminders 30 days prior.",
+      "Instrument the integration to emit alerts whenever AuthRespCode != 1, including bank code, timestamp, and requestId."
+    ],
+    "automatedInvestigationSteps": [
+      "Extract metadata: parse alert payload for occurrence_datetime, extId, and requestId.",
+      "Fetch hourly logs: load log file for the given hour (e.g., 'app-logs-2025-05-08-17.log').",
+      "Search by requestId: scan for matching <request-id> tags.",
+      "Retrieve full trace: capture all <log-message> blocks following that tag.",
+      "Parse response block: extract the JSON under 'Response:' and read AuthRespCode.",
+      "Evaluate outcome: if '1', mark success; else mark failure and record the code.",
+      "Generate incident report: compile date, requestId, extId, AuthRespCode, and failure reason.",
+      "Notify & escalate: on failure, post the report and open a ticket; on success, close the investigation."
+    ]
+  }
+}
