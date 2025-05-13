@@ -33,7 +33,7 @@ def parse_context(context_path):
                 parts = m_dt.group(1).strip().split()
                 if len(parts) >= 2:
                     dt_str = ' '.join(parts[0:2])
-    if not ref_no or not dt_str:
+    if not ref_no and not dt_str:
         raise ValueError(f"Unable to parse Ref No or Date/Time from {context_path}")
     return ref_no, dt_str
 
@@ -66,7 +66,7 @@ def find_best_match(ref_no, dt_str, report_dir):
     # 1) Exact extId match
     for fn, rpt in reports.items():
         meta = rpt.get('metadata', {})
-        if meta.get('extId') == ref_no:
+        if ref_no is not None and meta.get('extId') == ref_no:
             return fn
     # 2) Fallback: match by nearest occurrence_datetime
     closest_fn = None
@@ -102,6 +102,8 @@ def search_kb(context_path):
     """
     # Parse ticket context
     ref_no, dt_str = parse_context(context_path)
+    if not ref_no or not dt_str:
+        return { 'isMatchFound': False, 'reportId': '' }
 
     # Resolve paths
     ctx_dir = os.path.dirname(context_path)

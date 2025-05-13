@@ -1,0 +1,26 @@
+Dear Concern,
+
+Users are reporting that the “Transfer” button on the dashboard is completely unresponsive:
+
+Date/Time: 2025-05-13 14:30:00 BDT
+App Version: 2.3.1
+Platform: iOS 17.4
+Steps to Reproduce:
+
+Launch the app
+
+Navigate to Dashboard
+
+Tap the “Transfer” button
+
+Observed Behavior:
+• Tap produces no feedback — no loading spinner, no navigation, no error message.
+
+Expected Behavior:
+• Tapping “Transfer” should open the funds-transfer screen immediately.
+
+Requesting a root-cause analysis and fix.
+
+Regards,
+Abir Hossain
+Associate Software Engineer – IB Ops

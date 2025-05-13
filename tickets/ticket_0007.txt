@@ -1,0 +1,23 @@
+Dear Team,
+
+We’ve received multiple reports today that our internet banking service is unusually slow:
+
+Date/Time: 2025-05-13 16:30:00 BDT
+Impact: Pages take 10–15 seconds to load instead of under 2 seconds
+Scope: All users across web and mobile
+Symptoms:
+
+Slow page transitions after login
+
+Delays when viewing account balances and transaction history
+
+Timeouts when submitting payments
+
+Business Impact:
+Customers are frustrated by wait times, support calls are up, and we risk reputation damage if this continues.
+
+Please investigate the cause of the slowdown and restore normal performance as soon as possible.
+
+Thank you,
+Abir Hossain
+Associate Software Engineer – IB Ops
