@@ -1,1 +1,4 @@
 Date/Time: 2025-05-12 14:23:05 BDT
+UserID: U123456
+Account No: 0953180000001234
+Error Code: FT-VAL-001
