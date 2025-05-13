@@ -2,7 +2,7 @@
   "metadata": {
     "issue": "Sonali Bank NPSB Transaction Failures in MMBL Internet Banking",
     "occurrence_datetime": "2025-05-08T17:41:40.994+06:00",
-    "extId": "IBP25050811524606",
+    "extId": "IBP25050811524123",
     "requestId": "5c45c449-4666-4e51-8a56-84e54122bcb0",
     "authRespCode": "121",
     "failure_reason": "Not certified for NPSB network",
