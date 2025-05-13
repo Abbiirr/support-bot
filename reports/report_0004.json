@@ -38,6 +38,7 @@
     "automatedInvestigationSteps": [
       "Extract metadata: parse alert payload for occurrence_datetime, extId, and requestId.",
       "Fetch hourly logs: load log file for the given hour (e.g., 'app-logs-2025-05-08-17.log').",
+      "Service Type: Service",
       "Log Type: Need to read integration logs",
       "Search by requestId: scan for matching <request-id> tags.",
       "Retrieve full trace: capture all <log-message> blocks following that tag.",

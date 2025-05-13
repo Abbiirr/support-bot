@@ -16,7 +16,7 @@ def main():
 
     # 1. Generate context and reply files
     read_and_reply(ticket_filename)
-    gather_context(ticket_filename)
+    gather_context(ticket_filename, "MMBL")
     # 2. Build absolute path to the generated context file
     base_dir = os.path.dirname(__file__)
     base = os.path.splitext(ticket_filename)[0]

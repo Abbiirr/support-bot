@@ -1,2 +1,0 @@
-Please fetch and provide the file /app/mmbl-ib/service/logs/integration/integration-2025-05/integration.log.2025-05-08.17.xz so we can proceed with the transaction failure investigation.
-WARNING: report_id 'report_0004.json' does not match Ref No. 'IBP25050811524606'. You may need to update the report.
