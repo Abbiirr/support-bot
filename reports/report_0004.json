@@ -40,6 +40,7 @@
       "Fetch hourly logs: load log file for the given hour (e.g., 'app-logs-2025-05-08-17.log').",
       "Service Type: Service",
       "Log Type: Need to read integration logs",
+      "Search by Ref no or ExtId",
       "Search by requestId: scan for matching <request-id> tags.",
       "Retrieve full trace: capture all <log-message> blocks following that tag.",
       "Parse response block: extract the JSON under 'Response:' and read AuthRespCode.",

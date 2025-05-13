@@ -161,6 +161,11 @@ def resolve_ticket(context_path, report_id=None):
         os.path.join(os.path.dirname(context_path), os.pardir,
                      BOT_RESOLVE_FOLDER_NAME, f"{ticket_name}_step_1.txt")
     )
+    from bot_resolver_step4 import step4
+    ref_no = parse_context(context_path)[1]
+
+    output_path = step4(ref_no, step3_path)
+    print("Step 4 output at:", output_path)
     return {
         'step_1_file': step1_path,
         'step_2_file': step2_path,
