@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import lzma
 from datetime import datetime
 
 # Output folder name (relative to the context file)
@@ -87,17 +88,17 @@ def step2_determine_log_file(context_path):
     """
     Step 2: Determine the exact log file path using dt from step1 and config template.
     Writes the full path to bot-resolve/{ticket_name}_step_2.txt.
-    Returns the output file path.
+    Returns the output file path and the concrete log path.
     """
     project, dt = step1_identify_hour(context_path)
 
-    # Load template from config: e.g. "/app/.../integration-{year}-{month}/integration.log.{year}-{month}-{date}.{hour}.xz"
+    # Load template from config
     template = load_log_config(project, 'Integration')
 
     # Extract components
     year   = dt.strftime("%Y")
     month  = dt.strftime("%m")
-    date   = dt.strftime("%Y-%m-%d")
+    date   = dt.strftime("%d")
     hour   = dt.strftime("%H")
 
     # Format concrete path
@@ -112,22 +113,56 @@ def step2_determine_log_file(context_path):
     with open(step2_file, 'w', encoding='utf-8') as out:
         out.write(log_filepath)
 
-    return step2_file
+    return log_filepath, step2_file
+
+
+def step3_extract_log(context_path):
+    """
+    Step 3: Locate the xz archive under '../log-files', decompress it, and write the raw log.
+    Writes decompressed content to bot-resolve/{ticket_name}_step_3.log.
+    Returns the output log path.
+    """
+    # Get concrete path and path of step2 file
+    log_filepath, _ = step2_determine_log_file(context_path)
+
+    # Determine archive directory and file name
+    ctx_dir      = os.path.dirname(context_path)
+    archive_dir  = os.path.abspath(os.path.join(ctx_dir, os.pardir, 'log-files'))
+    archive_name = os.path.basename(log_filepath)
+    archive_path = os.path.join(archive_dir, archive_name)
+
+    if not os.path.isfile(archive_path):
+        raise FileNotFoundError(f"Archive not found: {archive_path}")
+
+    # Decompress the .xz archive
+    with lzma.open(archive_path, 'rt', encoding='utf-8') as src:
+        content = src.read()
+
+    # Write decompressed log to step 3 file
+    output_dir  = os.path.abspath(os.path.join(ctx_dir, os.pardir, BOT_RESOLVE_FOLDER_NAME))
+    ticket_name = os.path.splitext(os.path.basename(context_path))[0]
+    step3_file  = os.path.join(output_dir, f"{ticket_name}_step_3.log")
+    with open(step3_file, 'w', encoding='utf-8') as out:
+        out.write(content)
+
+    return step3_file
 
 
 def resolve_ticket(context_path, report_id=None):
     """
-    Orchestrator: runs step1 and step2 in sequence.
-    Returns dict with paths for both step outputs.
+    Orchestrator: runs steps 1, 2, and 3 in sequence.
+    Returns dict with paths for all step outputs.
     """
-    project, dt         = step1_identify_hour(context_path)
-    step2_path          = step2_determine_log_file(context_path)
-    ticket_name         = os.path.splitext(os.path.basename(context_path))[0]
-    step1_path          = os.path.abspath(
+    project, dt               = step1_identify_hour(context_path)
+    log_filepath, step2_path = step2_determine_log_file(context_path)
+    step3_path               = step3_extract_log(context_path)
+    ticket_name              = os.path.splitext(os.path.basename(context_path))[0]
+    step1_path               = os.path.abspath(
         os.path.join(os.path.dirname(context_path), os.pardir,
                      BOT_RESOLVE_FOLDER_NAME, f"{ticket_name}_step_1.txt")
     )
     return {
         'step_1_file': step1_path,
-        'step_2_file': step2_path
+        'step_2_file': step2_path,
+        'step_3_file': step3_path
     }

@@ -1,1 +1,1 @@
-/app/mmbl-ib/service/logs/integration/integration-2025-05/integration.log.2025-05-2025-05-08.17.xz
+/app/mmbl-ib/service/logs/integration/integration-2025-05/integration.log.2025-05-08.17.xz
