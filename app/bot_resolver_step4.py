@@ -54,5 +54,9 @@ def step4(ref_no: str, log_file_path: str) -> str:
                 out.write(rid + "\n")
         else:
             out.write(f"No request-id found for ref {ref_no}\n")
+    from bot_resolver_step5 import step5
+
+    out_path = step5(rid, log_file_path)
+    print("Step 5 log snippet at:", out_path)
 
     return step4_file

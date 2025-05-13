@@ -1,0 +1,78 @@
+<log-row><dateTime>2025-05-08/17:40:47.969/BDT</dateTime><request-id>5c45c449-4666-4e51-8a56-84e54122bcb0</request-id><processId>81202</processId><threadName>https-jsse-nio-8443-exec-3</threadName><threadId>37</threadId><threadPriority>5</threadPriority><logger>integrationLogger</logger><log-level>TRACE</log-level>
+<log-message>
+Invoking Service: 
+Class: com.brainstation.corebankingservice.core.soap.component.impl.EnquirySoapComponentImpl
+Method: getAccountDetailsByAccountNo
+Arguments: "1109"|"12600000308"
+</log-message></log-row>
+<log-row><dateTime>2025-05-08/17:40:49.045/BDT</dateTime><request-id>5c45c449-4666-4e51-8a56-84e54122bcb0</request-id><processId>81202</processId><threadName>https-jsse-nio-8443-exec-3</threadName><threadId>37</threadId><threadPriority>5</threadPriority><logger>integrationLogger</logger><log-level>TRACE</log-level>
+<log-message>
+Service Invocation returned: 
+Class: com.brainstation.corebankingservice.core.soap.component.impl.EnquirySoapComponentImpl 
+Method: getAccountDetailsByAccountNo 
+Response: {"responseCode":100,"responseMessages":[],"items":{"ACCOUNT_TITLE":"MOHAMMED MOIN UDDIN","ACCOUNT":"110912600000308","ACCOUNT_STATUS":"R","ACCOUNT_TYPE":"C","BRANCH_CODE":"1109","BRANCH_NAME":"AGRABAD  BRANCH","CELLPHONE":"8801711127409","PHONE":"01711127409","ADDRESS":"AL-HAJ AMENA MONZIL, WEST NIMTALA,BANDAR, CTG.","ZIPLIVE":"4100","CURRENCY_CODE":"000","AVAILABLE_BALANCE":71633.4,"BIRTHDAY":"31-12-1971","ACCOUNT_OPEN_DATE":"26-10-2016","CUSTOMER_ID":"0000026454","PRD_TYPE":"D","PRODUCT_ID":"126","CITY":"CHITTAGONG","SEX":"M"}} 
+</log-message></log-row>
+<log-row><dateTime>2025-05-08/17:40:49.373/BDT</dateTime><request-id>5c45c449-4666-4e51-8a56-84e54122bcb0</request-id><processId>81202</processId><threadName>https-jsse-nio-8443-exec-3</threadName><threadId>37</threadId><threadPriority>5</threadPriority><logger>integrationLogger</logger><log-level>TRACE</log-level>
+<log-message>
+Invoking Service: 
+Class: com.brainstation.corebankingservice.core.rest.component.impl.NPSBCoreComponentImpl
+Method: getToken
+Arguments: 
+</log-message></log-row>
+<log-row><dateTime>2025-05-08/17:40:49.373/BDT</dateTime><request-id>5c45c449-4666-4e51-8a56-84e54122bcb0</request-id><processId>81202</processId><threadName>https-jsse-nio-8443-exec-3</threadName><threadId>37</threadId><threadPriority>5</threadPriority><logger>integrationLogger</logger><log-level>TRACE</log-level>
+<log-message>
+<GetTokenRequest><InputParameter><BankCode>51</BankCode><UserName>MMBLIBFT</UserName></InputParameter></GetTokenRequest>
+</log-message></log-row>
+<log-row><dateTime>2025-05-08/17:40:49.438/BDT</dateTime><request-id>5c45c449-4666-4e51-8a56-84e54122bcb0</request-id><processId>81202</processId><threadName>https-jsse-nio-8443-exec-3</threadName><threadId>37</threadId><threadPriority>5</threadPriority><logger>integrationLogger</logger><log-level>TRACE</log-level>
+<log-message>
+Service Invocation returned: 
+Class: com.brainstation.corebankingservice.core.rest.component.impl.NPSBCoreComponentImpl 
+Method: getToken 
+Response: {"response":"1","OutputParameter":{"BankCode":"51","KeyID":"52930128","Key1":"k66kBviUTOjaFteMh4qyHWr4","Key2":"zQsWFedU"}} 
+</log-message></log-row>
+<log-row><dateTime>2025-05-08/17:41:17.163/BDT</dateTime><request-id>5c45c449-4666-4e51-8a56-84e54122bcb0</request-id><processId>81202</processId><threadName>https-jsse-nio-8443-exec-3</threadName><threadId>37</threadId><threadPriority>5</threadPriority><logger>integrationLogger</logger><log-level>TRACE</log-level>
+<log-message>
+Invoking Service: 
+Class: com.brainstation.corebankingservice.core.iso8583.component.impl.CoreBankingServiceImpl
+Method: fundTransferRequest
+Arguments: {"drAccount":"110912600000308","crAccount":"101190200001155","amount":"15000.0","narration":"IB25050825713524","branchCode":"1109","type":"Amount","date":"0508174117","serialNumber":"1","currentBalance":"0.0","principalBalance":"0.0"}
+</log-message></log-row>
+<log-row><dateTime>2025-05-08/17:41:40.975/BDT</dateTime><request-id>5c45c449-4666-4e51-8a56-84e54122bcb0</request-id><processId>81202</processId><threadName>https-jsse-nio-8443-exec-3</threadName><threadId>37</threadId><threadPriority>5</threadPriority><logger>integrationLogger</logger><log-level>TRACE</log-level>
+<log-message>
+Service Invocation returned: 
+Class: com.brainstation.corebankingservice.core.iso8583.component.impl.CoreBankingServiceImpl 
+Method: fundTransferRequest 
+Response: {"responseCode":100,"responseMessages":["Transaction success for Account NO: 90200001155 Customer ID: "],"items":{"dateTime":"0508174117","systemTraceAuditNumber":"000928","acquirerInstitutionCode":"X0000X0785X553","retrievalReferenceNumber":"X0000X0785X553","responseCode":"    0","responseDetails":"Transaction success for Account NO: 90200001155 Customer ID: "}} 
+</log-message></log-row>
+<log-row><dateTime>2025-05-08/17:41:40.992/BDT</dateTime><request-id>5c45c449-4666-4e51-8a56-84e54122bcb0</request-id><processId>81202</processId><threadName>https-jsse-nio-8443-exec-3</threadName><threadId>37</threadId><threadPriority>5</threadPriority><logger>integrationLogger</logger><log-level>TRACE</log-level>
+<log-message>
+Invoking Service: 
+Class: com.brainstation.corebankingservice.core.rest.component.impl.NPSBCoreComponentImpl
+Method: doAccountBaseDeposit
+Arguments: {"InputParameter":{"KeyID":"52930128","Password":"KxXvatpL7Jm7nRewChrDQQ==","ExtID":"IBP25050811524606","BankName":"SONB","AccountNo":"eYbAP+S4XIoWeaRe/RJA3w==","Amount":"15000.0","Currency":"50","SourceOfFund":"110912600000308","Comment":"AAN"}}
+</log-message></log-row>
+<log-row><dateTime>2025-05-08/17:41:40.994/BDT</dateTime><request-id>5c45c449-4666-4e51-8a56-84e54122bcb0</request-id><processId>81202</processId><threadName>https-jsse-nio-8443-exec-3</threadName><threadId>37</threadId><threadPriority>5</threadPriority><logger>integrationLogger</logger><log-level>TRACE</log-level>
+<log-message>
+<AccountDepositRequest><InputParameter><BankCode>51</BankCode><UserName>MMBLIBFT</UserName><KeyID>52930128</KeyID><Password>KxXvatpL7Jm7nRewChrDQQ==</Password><ExtID>IBP25050811524606</ExtID><UserID>MMBL</UserID><BankName>SONB</BankName><AccountNo>eYbAP+S4XIoWeaRe/RJA3w==</AccountNo><Amount>15000.0</Amount><Currency>50</Currency><TermName>MMBLSOAP</TermName><SourceOfBank>MMBL</SourceOfBank><SourceOfFund>110912600000308</SourceOfFund><Comment>AAN</Comment></InputParameter></AccountDepositRequest>
+</log-message></log-row>
+<log-row><dateTime>2025-05-08/17:41:41.039/BDT</dateTime><request-id>5c45c449-4666-4e51-8a56-84e54122bcb0</request-id><processId>81202</processId><threadName>https-jsse-nio-8443-exec-3</threadName><threadId>37</threadId><threadPriority>5</threadPriority><logger>integrationLogger</logger><log-level>TRACE</log-level>
+<log-message>
+Service Invocation returned: 
+Class: com.brainstation.corebankingservice.core.rest.component.impl.NPSBCoreComponentImpl 
+Method: doAccountBaseDeposit 
+Response: {"OutputParameter":{"AuthRespCode":"121","Info":"Not certified for NPSB network"}} 
+</log-message></log-row>
+<log-row><dateTime>2025-05-08/17:41:41.132/BDT</dateTime><request-id>5c45c449-4666-4e51-8a56-84e54122bcb0</request-id><processId>81202</processId><threadName>https-jsse-nio-8443-exec-3</threadName><threadId>37</threadId><threadPriority>5</threadPriority><logger>integrationLogger</logger><log-level>TRACE</log-level>
+<log-message>
+Invoking Service: 
+Class: com.brainstation.corebankingservice.core.iso8583.component.impl.CoreBankingServiceImpl
+Method: fundTransferRequest
+Arguments: {"drAccount":"101190200001155","crAccount":"110912600000308","amount":"15000.0","narration":"IB25050825713524","branchCode":"1011","type":"Amount","date":"0508174141","serialNumber":"1","currentBalance":"0.0","principalBalance":"0.0"}
+</log-message></log-row>
+<log-row><dateTime>2025-05-08/17:42:04.838/BDT</dateTime><request-id>5c45c449-4666-4e51-8a56-84e54122bcb0</request-id><processId>81202</processId><threadName>https-jsse-nio-8443-exec-3</threadName><threadId>37</threadId><threadPriority>5</threadPriority><logger>integrationLogger</logger><log-level>TRACE</log-level>
+<log-message>
+Service Invocation returned: 
+Class: com.brainstation.corebankingservice.core.iso8583.component.impl.CoreBankingServiceImpl 
+Method: fundTransferRequest 
+Response: {"responseCode":100,"responseMessages":["Transaction success for Account NO: 12600000308 Customer ID: 0000026454"],"items":{"dateTime":"0508174141","systemTraceAuditNumber":"000929","acquirerInstitutionCode":"X0000X0785X554","retrievalReferenceNumber":"X0000X0785X554","responseCode":"    0","responseDetails":"Transaction success for Account NO: 12600000308 Customer ID: 0000026454"}} 
+</log-message></log-row>

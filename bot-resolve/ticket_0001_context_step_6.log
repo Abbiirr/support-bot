@@ -1,0 +1,7 @@
+<log-row><dateTime>2025-05-08/17:41:41.039/BDT</dateTime><request-id>5c45c449-4666-4e51-8a56-84e54122bcb0</request-id><processId>81202</processId><threadName>https-jsse-nio-8443-exec-3</threadName><threadId>37</threadId><threadPriority>5</threadPriority><logger>integrationLogger</logger><log-level>TRACE</log-level>
+<log-message>
+Service Invocation returned: 
+Class: com.brainstation.corebankingservice.core.rest.component.impl.NPSBCoreComponentImpl 
+Method: doAccountBaseDeposit 
+Response: {"OutputParameter":{"AuthRespCode":"121","Info":"Not certified for NPSB network"}} 
+</log-message></log-row>

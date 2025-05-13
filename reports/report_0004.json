@@ -43,6 +43,7 @@
       "Search by Ref no or ExtId",
       "Search by requestId: scan for matching <request-id> tags.",
       "Retrieve full trace: capture all <log-message> blocks following that tag.",
+      "Find specific log: <log-message>\nService Invocation returned: \nClass: com.brainstation.corebankingservice.core.rest.component.impl.NPSBCoreComponentImpl \nMethod: doAccountBaseDeposit ",
       "Parse response block: extract the JSON under 'Response:' and read AuthRespCode.",
       "Evaluate outcome: if '1', mark success; else mark failure and record the code.",
       "Generate incident report: compile date, requestId, extId, AuthRespCode, and failure reason.",
